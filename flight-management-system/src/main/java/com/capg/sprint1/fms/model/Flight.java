@@ -1,5 +1,4 @@
 package com.capg.sprint1.fms.model;
-import java.math.BigInteger;
 
 
 public class Flight {

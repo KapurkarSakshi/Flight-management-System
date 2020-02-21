@@ -1,6 +1,5 @@
 package com.capg.sprint1.fms.model;
 
-import sun.security.util.Password;
 
 public class User {
 	String userType;

@@ -1,14 +1,15 @@
 package com.capg.sprint1.fms.dao;
 
-import java.math.BigInteger;
+
 import java.time.LocalDate;
 import java.util.*;
 import com.capg.sprint1.fms.model.*;
+import com.capg.sprint1.fms.service.*;
 
 
 public class BookingDaoImpl implements BookingDao {
 
-	static Map<Long,Booking> bookingNo=new HashMap<Long,Booking>();
+	public static Map<Long,Booking> bookingNo=new HashMap<Long,Booking>();
 	public BookingDaoImpl() {
 		addDetails();
 	}
@@ -44,7 +45,6 @@ public class BookingDaoImpl implements BookingDao {
 		l3.add(p222);
 		l3.add(p333);
 //long flightNumber, String flightModel, String carrierName, Integer seatCapacity
-		  Flight f;
 		Flight f1=new Flight(880,"Model1","Carrier1",100);
 		Flight f2=new Flight(881,"Model2","Carrier2",200);
 		Flight f3=new Flight(882,"Model3","Carrier3",300);
@@ -69,45 +69,23 @@ public class BookingDaoImpl implements BookingDao {
 			return null;
 	}
 
-	public boolean deleteBooking(long bookingId) throws BookingException{
-		if(!bookingNo.containsKey(bookingId)) {
-			throw new BookingException("Error :BookingId not found");
-		}
-		bookingNo.remove(bookingId);
-		return true;
+	public boolean deleteBooking(long bookingId) throws BookingIdException{
+		if(true) {bookingNo.remove(bookingId);}
+		return false;
 		}
   
-	public  LocalDate modifyByDate(long bookingId,LocalDate date) throws BookingException{
-		if(!bookingNo.containsKey(bookingId)) {
-			throw new BookingException("Error : Booking Id not found, Please enter a valid booking Id");
-		}
-		else {
-		 bookingNo.get(bookingId).setBookingDate(date); 
-		}
+	public  LocalDate modifyByDate(long bookingId,LocalDate date) throws BookingIdException{
+		bookingNo.get(bookingId).setBookingDate(date); 
 		return date;
 	}
 	Passenger passenger=new Passenger();
 	
-	public  Passenger addByPassenger(long bookingId,Passenger p) throws BookingException{
-		if(!bookingNo.containsKey(bookingId)) {
-			throw new BookingException("Error : Booking Id not found, Please enter a valid booking Id");
-		}
-		else {
+	public  Passenger addByPassenger(long bookingId,Passenger p) throws BookingIdException{
 		   bookingNo.get(bookingId).getPassengerList().add(p);
-			}
-		return p;
-	
+		  return p;
 	}
-	public  Passenger deleteByPassenger(long bookingId,String passengerName) throws BookingException,InvalidNameException{
-		if(!	bookingNo.containsKey(bookingId)) {
-			throw new BookingException("Error : Booking Id not found, Please enter a valid booking Id");
-		}
-		else {
-			if(bookingNo.get(bookingId).getPassengerList().stream().filter(p->p.getPassengerName().equalsIgnoreCase(passengerName)).count()==0) {
-				throw new InvalidNameException("Error: Name not found, Please enter valid name");
-			}
-		   bookingNo.get(bookingId).getPassengerList().remove(passenger);	
-		      }
+	public  Passenger deleteByPassenger(long bookingId,String passengerName) throws BookingIdException,InvalidNameException{
+		   bookingNo.get(bookingId).getPassengerList().remove(passenger);
 		return passenger;
 		}
 	
