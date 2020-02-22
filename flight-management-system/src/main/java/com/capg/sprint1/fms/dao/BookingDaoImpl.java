@@ -11,9 +11,7 @@ public class BookingDaoImpl implements BookingDao {
 
 	public static Map<Long,Booking> bookingNo=new HashMap<Long,Booking>();
 	public BookingDaoImpl() {
-		addDetails();
-	}
-	public void addDetails() {
+		
 //User ::String userType, long userId, String userName, String userPassword, long userPhone,
 	//		String userEmail	     
 	     User u1=new User("Type1",1239,"Sak","passwrd",964090742,"sakshikapurkar@gmail.com");
